@@ -1,0 +1,34 @@
+CC			:= gcc -g
+LD			:= gcc
+CFLAGS		:= -g -W -std=c99 -c
+LDFLAGS     := -lcurese
+
+
+all:TinyEdit
+
+TinyEdit:main.o line.o bufer.o tools.o chunk.o document.o cursor.o
+	$(LD) $(LDFLAGS) $^ -o $@
+
+myless:myless.o line.o buffer.o tools.o chunk.o
+	$(LD) $(LDFLAGS) $^ -o $@ 
+
+myless.o:myless.c lince.h buffer.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+document.o:document.c line.h buffer.h cursor.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+cursor.o:cursor.c line.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+line.o:line.c line.h buffer.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+tools.o:tools.c tools.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+chunk.o:chunk.c line.h buffer.h tedef.h
+	$(LD) $(CFLAGS) -o $@ $<
+
+buffer.o:buffer.c buffer.h tools.h
+	$(LD) $(CFLAGS) -o $@ $<

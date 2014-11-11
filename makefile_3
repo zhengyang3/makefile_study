@@ -1,0 +1,35 @@
+多定义几个变量，分别代表编译命令、编译参数、连接命令和连接参数等，这样可以带来更多的便利！
+CC			:= gcc -g
+LD			:= gcc
+CFLAGS		:= -g -W -std=c99 -c
+LDFLAGS     := -lcurese
+
+
+all:TinyEdit
+
+TinyEdit:main.o line.o bufer.o tools.o chunk.o document.o cursor.o
+	$(LD) $(LDFLAGS) main.o line.o tools.o buffer.o -o TinyEdit
+
+myless:myless.o line.o buffer.o tools.o chunk.o
+	$(LD) $(LDFLAGS) myless.o line.o tools.o buffer.o -o myless 
+
+myless.o:myless.c lince.h buffer.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o myless.o myless.c
+
+document.o:document.c line.h buffer.h cursor.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o document.o document.c
+
+cursor.o:cursor.c line.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o cursor.o cursor.c
+
+line.o:line.c line.h buffer.h tools.h tedef.h
+	$(LD) $(CFLAGS) -o line.o line.c
+
+tools.o:tools.c tools.h tedef.h
+	$(LD) $(CFLAGS) -o tool.o tools.c
+
+chunk.o:chunk.c line.h buffer.h tedef.h
+	$(LD) $(CFLAGS) -o chunk.o chunk.c
+
+buffer.o:buffer.c buffer.h tools.h
+	$(LD) $(CFLAGS) -o buffer.o buffer.c
