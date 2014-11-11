@@ -1,3 +1,4 @@
+# 利用makefile支持从“.c”文件到".o"文件转换的隐匿规则！
 all:TinyEdit
 
 TinyEdit:main.o line.o buffer.o tools.o chunk.o document.o cursor.o
